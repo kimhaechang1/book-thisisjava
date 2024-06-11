@@ -6,6 +6,7 @@
 
 <ul>
     <li><a href="/docs/JAVA 변수.md">JAVA 변수</a></li>
+    <li><a href="/docs/JAVA 상수접합.md">JAVA Constant Folding></a></li>
 </ul>
 
 ## Chapter 05 참조타입

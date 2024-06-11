@@ -12,16 +12,6 @@
 
 절차지향은 말그대로 프로그래밍 된 코드의 순서에 따라 진행하는 것을 절차지향이라고 표현한다.
 
-그러한 순서는 보통 **함수의 호출순서**를 의미하며
-
-데이터가 여러 함수를 거치면서 변경되거나 사용된다.
-
-결국 절차지향은 **데이터의 흐름**이 중요하고
-
-각 데이터들이 사용되는 함수들의 순서가 중요한 프로그래밍 방법에 해당된다.
-
-아래는 절차지향식으로 학생을 표현한 후 데이터를 업데이트하고 출력하는 과정이다.
-
 ```java
 public class Practice {
     static class Student{
@@ -42,7 +32,6 @@ public class Practice {
         Student student = new Student();
         insertStudentData(student, 10, "김회창");
         printInfo(student);
-        // 여기서 두 함수의 위치가 바뀌면 문제가 발생한다.
     }
 }
 ```
@@ -72,7 +61,6 @@ public class Practice {
         Student student = new Student();
         student.update(10, "김회창");
         student.printInfo();
-        // 두 함수의 순서가 바뀌더라도 문제가 발생하지 않는다.
     }
 }
 ```
