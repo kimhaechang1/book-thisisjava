@@ -55,7 +55,7 @@
 ## Chapter 15 컬렉션 자료구조
 
 <ul>
-    <li><a href="/docs/JAVA Vector의 수상한점">JAVA Vector</a></li>
+    <li><a href="/docs/JAVA Vector.md">JAVA Vector</a></li>
     <li><a href="/docs/JAVA hash.md">JAVA Hash, HashTable, HashMap</a><li>
     <li><a href="/docs/JAVA synchronizedCollection.md">JAVA 동기화된 컬렉션</a></li>
     <li><a href="/docs/JAVA immutableCollection.md">JAVA 불변 컬렉션</a></li>
