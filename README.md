@@ -6,7 +6,7 @@
 
 <ul>
     <li><a href="/docs/JAVA 변수.md">JAVA 변수</a></li>
-    <li><a href="/docs/JAVA 상수접합.md">JAVA Constant Folding></a></li>
+    <li><a href="/docs/JAVA 상수접합.md">JAVA Constant Folding</a></li>
 </ul>
 
 ## Chapter 05 참조타입
@@ -56,7 +56,7 @@
 
 <ul>
     <li><a href="/docs/JAVA Vector.md">JAVA Vector</a></li>
-    <li><a href="/docs/JAVA hash.md">JAVA Hash, HashTable, HashMap</a><li>
+    <li><a href="/docs/JAVA hash.md">JAVA Hash, HashMap</a><li>
     <li><a href="/docs/JAVA synchronizedCollection.md">JAVA 동기화된 컬렉션</a></li>
     <li><a href="/docs/JAVA immutableCollection.md">JAVA 불변 컬렉션</a></li>
 <ul>
