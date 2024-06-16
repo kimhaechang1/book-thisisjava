@@ -60,3 +60,9 @@
     <li><a href="/docs/JAVA synchronizedCollection.md">JAVA 동기화된 컬렉션</a></li>
     <li><a href="/docs/JAVA immutableCollection.md">JAVA 불변 컬렉션</a></li>
 <ul>
+
+## Chapter 16 람다식
+
+<ul>
+    <li><a href="/docs/JAVA functionalInterface.md">JAVA 함수형 인터페이스</a><li>
+</ul>
