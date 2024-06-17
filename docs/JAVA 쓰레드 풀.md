@@ -387,8 +387,135 @@ public void execute(Runnable command) {
 
 execute에 작업 가능한 스레드가 있다면 바로 가져가던가 아니면 작업대기큐에 넣던가 가 이루어진다.
 
-//
+### 비트 연산으로 확인하는 worker쓰레드 수
 
-Worker에 대해서 추가적으로 적기,
+스레드 풀의 상태는 AtomicInteger를 사용해서 비트 연산을 통해 확인한다.
 
-runWorker() 메소드에 대해서 추가적으로 적기
+```java
+private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
+private static final int COUNT_BITS = Integer.SIZE - 3;
+private static final int COUNT_MASK = (1 << COUNT_BITS) - 1;
+private static int ctlOf(int rs, int wc) { return rs | wc; }
+private static final int RUNNING    = -1 << COUNT_BITS;
+```
+
+여기서 rs는 runState를 의미하고, wc는 workerCount를 의미한다.
+
+즉, 초기에 ctl변수는 RUNNING상태의 스레드 0개를 나타내는 정수값이 저장된다.
+
+```
+RUNNING bit: 11111111 11111111 11111111 11111111
+RUNNING << 29: 11100000 00000000 00000000 00000000
+0 bit: 00000000 00000000 00000000 00000000
+
+result: 11100000 00000000 00000000 00000000
+```
+
+이 ctl변수에 다양한 비트 마스킹을 통해 스레드풀의 상태를 변화시킨다.
+
+AtomicInteger는 Integer에서 동기화를 지원하는 클래스이다.
+
+COUNT_BITS는 -3을 통해 하위 29개의 비트로 표현한다는걸 의미하는 상수이고 (참고로 Integer.SIZE = 32)
+
+COUNT_MASK는 하위 29개 비트를 1로 만들어서 마스킹을 위한 상수이다.
+
+여기서 worker 스레드수를 반환하는 메서드를 살펴보면
+
+```java
+private static int workerCountOf(int c)  { return c & COUNT_MASK; }
+```
+
+이를 실제 초기화 후 호출했다고 가정하면
+
+```
+초기 ctl: 11100000 00000000 00000000 00000000
+
+COUNT_BITS = 29
+COUNT_MASK: (1 << COUNT_BITS) -1
+COUNT_MASK: (00100000 00000000 00000000 00000000) - 1
+-1 -> 11111111 11111111 11111111 11111111
+둘을 더해주면
+
+result: 00000000 00000000 00000000 00000000
+
+따라서 초창기 workerCountOf를 구하면 0이 나온다.
+```
+
+addWorker() 메서드를 살펴보면
+
+```java
+private boolean addWorker(Runnable firstTask, boolean core) {
+        retry:
+        for (int c = ctl.get();;) {
+            // Check if queue empty only if necessary.
+            if (runStateAtLeast(c, SHUTDOWN)
+                && (runStateAtLeast(c, STOP)
+                    || firstTask != null
+                    || workQueue.isEmpty()))
+                return false;
+
+            for (;;) {
+                if (workerCountOf(c)
+                    >= ((core ? corePoolSize : maximumPoolSize) & COUNT_MASK))
+                    return false;
+                if (compareAndIncrementWorkerCount(c))
+                    break retry;
+                c = ctl.get();  // Re-read ctl
+                if (runStateAtLeast(c, SHUTDOWN))
+                    continue retry;
+                // else CAS failed due to workerCount change; retry inner loop
+            }
+        }
+
+        boolean workerStarted = false;
+        boolean workerAdded = false;
+        Worker w = null;
+        try {
+            w = new Worker(firstTask);
+            final Thread t = w.thread;
+            if (t != null) {
+                final ReentrantLock mainLock = this.mainLock;
+                mainLock.lock();
+                try {
+                    // Recheck while holding lock.
+                    // Back out on ThreadFactory failure or if
+                    // shut down before lock acquired.
+                    int c = ctl.get();
+
+                    if (isRunning(c) ||
+                        (runStateLessThan(c, STOP) && firstTask == null)) {
+                        if (t.getState() != Thread.State.NEW)
+                            throw new IllegalThreadStateException();
+                        workers.add(w);
+                        workerAdded = true;
+                        int s = workers.size();
+                        if (s > largestPoolSize)
+                            largestPoolSize = s;
+                    }
+                } finally {
+                    mainLock.unlock();
+                }
+                if (workerAdded) {
+                    container.start(t);
+                    workerStarted = true;
+                }
+            }
+        } finally {
+            if (! workerStarted)
+                addWorkerFailed(w);
+        }
+        return workerStarted;
+    }
+```
+
+뭔가 많이 복잡한데 대충 요약하자면
+
+스레드 풀의 작업큐에 작업을 넣을수 있는 상태인지 먼저 체크한다.
+
+그리고 코어 풀사이즈 보다 현재 스레드수 상태가 더 큰지 체크하고, ctl 변수값에 1을 더하여 worker 스레드수가 하나 더 늘어남을 기록한다.
+
+여기서 mainLock은 간단하게만 알아보자면, 대충 synchronized 블록을 형성하는것과 동일하다.
+
+그래서 Worker를 workers에 추가하는것이 핵심이다.
+
+// runWorker와 언제 작업을 처리하는지 확인하기
