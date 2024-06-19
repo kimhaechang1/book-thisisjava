@@ -56,7 +56,7 @@
 
 <ul>
     <li><a href="/docs/JAVA Vector.md">JAVA Vector</a></li>
-    <li><a href="/docs/JAVA hash.md">JAVA Hash, HashMap</a><li>
+    <li><a href="/docs/JAVA hash.md">JAVA Hash, HashMap</a></li>
     <li><a href="/docs/JAVA synchronizedCollection.md">JAVA 동기화된 컬렉션</a></li>
     <li><a href="/docs/JAVA immutableCollection.md">JAVA 불변 컬렉션</a></li>
 </ul>
@@ -64,7 +64,7 @@
 ## Chapter 16 람다식
 
 <ul>
-    <li><a href="/docs/JAVA functionalInterface.md">JAVA 함수형 인터페이스</a><li>
+    <li><a href="/docs/JAVA functionalInterface.md">JAVA 함수형 인터페이스</a></li>
 </ul>
 
 ## Chapter 17 스트림 요소 처리
@@ -77,4 +77,16 @@
 
 <ul>   
     <li><a href="/docs/JAVA Data 입출력.md">JAVA 데이터 입출력</a></li>
+</ul>
+
+## Chapter 18 데이터 입출력
+
+<ul>   
+    <li><a href="/docs/JAVA Data 입출력.md">JAVA 데이터 입출력</a></li>
+</ul>
+
+## Chapter 19 네트워크 입출력
+
+<ul>
+    <li><a href="/docs/JAVA network.md">JAVA 네트워크</a></li>
 </ul>
