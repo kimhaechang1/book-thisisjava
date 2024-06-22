@@ -36,6 +36,7 @@
     <li><a href="/docs/JAVA String.md">JAVA String 클래스</a></li>
     <li><a href="/docs/JAVA Reflection.md">JAVA 리플렉션</a></li>
     <li><a href="/docs/JAVA Annotation.md>">JAVA 어노테이션</a></li>
+    <li><a href="/docs/JAVA Record.md>">JAVA Record</a></li>
 </ul>
 
 ## Chapter 13 제네릭
@@ -96,4 +97,14 @@
 <ul>
     <li><a href="/docs/JAVA jdbc.md">JAVA jdbc</a></li>
     <li><a href="/docs/JAVA transaction.md">JAVA transaction</a></li>
+</ul>
+
+## Chapter 21 JAVA 21에서 강화된 언어 및 라이브러리
+
+<ul>
+    <li><a href="/docs/JAVA 21_variable.md">JAVA 21 지역변수 타입추론</a></li>
+    <li><a href="/docs/JAVA 21_switch.md">JAVA 21 switch</a></li>
+    <li><a href="/docs/JAVA 21_record_pattern.md">JAVA 21 record pattern</a></li>
+    <li><a href="/docs/JAVA 21_virtual_thread.md">JAVA 21 virtual thread</a></li>
+    <li><a href="/docs/JAVA 21_sequenced_collection.md">JAVA 21 sequenced collection</a></li>
 </ul>
