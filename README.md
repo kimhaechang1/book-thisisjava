@@ -35,7 +35,7 @@
     <li><a href="/docs/JAVA Object.md">JAVA Object 클래스</a></li>
     <li><a href="/docs/JAVA String.md">JAVA String 클래스</a></li>
     <li><a href="/docs/JAVA Reflection.md">JAVA 리플렉션</a></li>
-    <li><a href="/docs/JAVA Annotation.md>">JAVA 어노테이션</a></li>
+    <li><a href="/docs/JAVA Annotation.md">JAVA 어노테이션</a></li>
     <li><a href="/docs/JAVA Record.md>">JAVA Record</a></li>
 </ul>
 
