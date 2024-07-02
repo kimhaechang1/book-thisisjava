@@ -80,12 +80,6 @@
     <li><a href="/docs/JAVA Data 입출력.md">JAVA 데이터 입출력</a></li>
 </ul>
 
-## Chapter 18 데이터 입출력
-
-<ul>   
-    <li><a href="/docs/JAVA Data 입출력.md">JAVA 데이터 입출력</a></li>
-</ul>
-
 ## Chapter 19 네트워크 입출력
 
 <ul>
